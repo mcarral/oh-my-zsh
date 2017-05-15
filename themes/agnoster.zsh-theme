@@ -95,17 +95,17 @@ prompt_git() {
   local ref dirty mode repo_path
   repo_path=$(git rev-parse --git-dir 2>/dev/null)
 
-	if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1); then
+  if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1); then
     ref=$(git symbolic-ref HEAD 2> /dev/null) || ref="➦ $(git rev-parse --short HEAD 2> /dev/null)"
     
-		if [[ "$(command git config --get oh-my-zsh.hide-status 2>/dev/null)" != "1" ]];then
-			dirty=$(parse_git_dirty)
-			if [[ -n $dirty ]]; then
-				prompt_segment yellow black
-			else
-				prompt_segment green black
-			fi
-		fi
+    if [[ "$(command git config --get oh-my-zsh.hide-status 2>/dev/null)" != "1" ]];then
+      dirty=$(parse_git_dirty)
+      if [[ -n $dirty ]]; then
+        prompt_segment yellow black
+      else
+        prompt_segment green black
+      fi
+    fi
 
     if [[ -e "${repo_path}/BISECT_LOG" ]]; then
       mode=" <B>"
